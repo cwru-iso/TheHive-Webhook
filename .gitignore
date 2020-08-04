@@ -1,0 +1,11 @@
+# Mac files
+.DS_Store
+
+# VSCode files
+.vscode/
+
+# virtualenv
+venv/
+
+# Zips
+*.zip
