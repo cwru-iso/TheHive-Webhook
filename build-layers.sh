@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
+PYTHON_VERSION=3.7
+BUILD_TAG=thehive-lambda-layers
+
 # Rebuild image to make sure latest packages are downloaded
 cd docker
-docker build . -t thehive-lambda-layers --no-cache
+docker pull "lambci/lambda:build-python$PYTHON_VERSION"
+docker build . -t "$BUILD_TAG" --build-arg PYTHON_VERSION --no-cache
 cd ..
 
 # Run one-off command to copy new Zips to host
-docker run --rm -it -v "$PWD":/app thehive-lambda-layers bash -c ' yes | cp -rf /var/task/*.zip /app'
+echo "******** Copying completed layer builds to host ********"
+docker run --rm -it -v "$PWD":/app "$BUILD_TAG" bash -c ' yes | cp -rf /var/task/*.zip /app'
+
+# Cleanup dangling images
+echo "******** Cleaning up dangling docker images ********"
+docker rmi $(docker images -f "dangling=true" -q) 2>/dev/null
