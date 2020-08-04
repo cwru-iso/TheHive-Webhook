@@ -7,5 +7,6 @@ zip -9 -r "$ZIP_FILE" . \
     -x ".gitignore" \
     -x "docker/*" \
     -x "*.sh" \
-    -x "*.pyc"
-    -x "*.zip"
+    -x "*.pyc" \
+    -x "*.zip" \
+    -x ".DS_Store"
