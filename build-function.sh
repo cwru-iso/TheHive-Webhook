@@ -5,5 +5,7 @@ zip -9 -r "$ZIP_FILE" . \
     -x ".vscode/*" \
     -x ".git/*" \
     -x ".gitignore" \
+    -x "docker/*" \
     -x "*.sh" \
     -x "*.pyc"
+    -x "*.zip"
