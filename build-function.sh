@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-ZIP_FILE="$(pwd)/TheHive-Webhooks_$(date '+%s').zip"
-zip -9 -r "$ZIP_FILE" . \
+echo "======== Compressing project into single ZIP ========"
+NOW=$(date '+%Y.%m.%d-%s')
+zip -9 -r "TheHive-Webhooks_$NOW.zip" . \
+    -x ".*" \
     -x "venv/*" \
-    -x ".vscode/*" \
-    -x ".git/*" \
-    -x ".gitignore" \
     -x "docker/*" \
-    -x "*.sh" \
+    -x "build-*.sh" \
+    -x "*__pycache__*" \
     -x "*.pyc" \
-    -x "*.zip" \
-    -x ".DS_Store"
+    -x "*.zip"
